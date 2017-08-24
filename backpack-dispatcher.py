@@ -96,7 +96,8 @@ class Job(object):
 
     def run_command(self):
         with PidFile(self.name) as pid:
-            subprocess.check_output(self.command)
+            subprocess.check_output(self.command, shell=True,
+                                                  stderr=subprocess.STDOUT)
 
     def __enter__(self, path=LOGFILE):
         self.logger = logging.getLogger(self.name)
