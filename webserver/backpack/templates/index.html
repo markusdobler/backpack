@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+  content="width=device-width, initial-scale=1, user-scalable=yes">
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<link rel="stylesheet" href="{{url_for("static", filename="css/bootstrap-solarized-light.css")}}">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<title>Backpack Status</title>
+</head>
+<body>
+ 
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ "info" if category=="message" else category }} alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <h1>Backpack Status</h1>
+        <div class="row">
+          {% for host in status | sort %}
+          <div class="col-md-3">
+            <h3>{{host}}</h3>
+            <ul>
+              {% for (timestamp, job, status_text, status_class, expected_interval_days) in status[host] | sort(reverse=True) %}
+              <li><span class="text-{{status_class}}" data-html="true" data-toggle="tooltip" title="{{'{:%Y-%m-%d %H:%M:%S}<br>expected interval: {:d} days'.format(timestamp, expected_interval_days)}}" >{{status_text}}</span>: {{job}}</li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="col-md-10 col-md-offset-1">
+        <h2>Stats</h2>
+        <div class="row">
+          {% for host in stats | sort %}
+          <div class="col-md-3">
+            <h3>{{host}}</h3>
+            <ul>
+              {% for key, val in stats[host] | dictsort %}
+              <li><span class="text-info">{{key}}</span>: {{val}}</li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+  </script>
+</body>
+</html>

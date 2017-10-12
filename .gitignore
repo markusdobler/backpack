@@ -1,3 +1,5 @@
 set_passphrase.sh
-
+*.pyc
 .*.sw?
+webserver/secret-key.txt
+webserver/data.json
