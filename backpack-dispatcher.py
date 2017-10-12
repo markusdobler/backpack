@@ -87,7 +87,7 @@ class Job(object):
                     return
                 except SkipExecution as ex:
                     log.append(str(ex))
-            raise SkipExecution("All failed: %r" % log)
+            raise SkipExecution("None matched: %r" % log)
 
         cmd, args = condition[0], condition[1:]
         function = {
