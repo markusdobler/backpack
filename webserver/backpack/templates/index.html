@@ -36,8 +36,9 @@
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
         <h1>Backpack Status</h1>
+        {% for host_batch in status | sort | batch(4) %}
         <div class="row">
-          {% for host in status | sort %}
+          {% for host in host_batch %}
           <div class="col-md-3">
             <h3>{{host}}</h3>
             <ul>
@@ -48,11 +49,13 @@
           </div>
           {% endfor %}
         </div>
+        {% endfor %}
       </div>
       <div class="col-md-10 col-md-offset-1">
         <h2>Stats</h2>
+        {% for host_batch in stats | sort | batch(4) %}
         <div class="row">
-          {% for host in stats | sort %}
+          {% for host in host_batch %}
           <div class="col-md-3">
             <h3>{{host}}</h3>
             <ul>
@@ -63,6 +66,7 @@
           </div>
           {% endfor %}
         </div>
+        {% endfor %}
       </div>
     </div>
   </div>
