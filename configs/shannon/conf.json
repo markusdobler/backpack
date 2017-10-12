@@ -1,0 +1,14 @@
+[
+    {
+        "name": "shannon.borg",
+        "command": "/home/sfoo/wip/backpack/borg-run.sh",
+        "condition": ["and",
+            ["not_since", 20, "hours"],
+            ["or",
+                ["hour_is_between", 2, 7],
+                ["not_since", 50, "hours"]
+            ],
+            ["ping", "crashpi1"]
+        ]
+    }
+]
