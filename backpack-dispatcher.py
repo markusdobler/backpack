@@ -33,13 +33,18 @@ def time_since_last_successful_run(jobname):
     return datetime.now() - datetime.fromtimestamp(seconds_since_epoch)
 
 
-def check_ping(hostname):
+def check_ping(hostname, port=22):
     import socket
-    ClientSocket = socket.socket()
-    try:
-        ClientSocket.connect((hostname, 22))
-    except socket.error:
-        raise SkipExecution("Could not ping host %r" % hostname)
+    sockaddrs = set(s[4] for s in socket.getaddrinfo(hostname, port,
+                                                     socket.AF_INET))
+    for addr in sockaddrs:
+        try:
+            ClientSocket = socket.socket()
+            ClientSocket.connect(addr)
+            return
+        except socket.error:
+            pass
+    raise SkipExecution("Could not ping host %r" % hostname)
 
 def check_hour_is_between(start, end):
     "can also wrap around midnight, e.g. start=22, end=4"
