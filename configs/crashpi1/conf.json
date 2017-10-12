@@ -1,0 +1,57 @@
+[
+    {
+        "name": "nas.borg",
+        "command": "/home/pi/backpack/borg-run.sh",
+        "condition": ["and",
+            ["not_since", 20, "hours"],
+            ["or",
+                ["hour_is_between", 5, 9],
+                ["not_since", 50, "hours"]
+            ]
+        ]
+    },
+    {
+        "name": "crashpi1.par2protect",
+        "command": "/home/pi/backpack/par2protect.py /media/data/borg/data/",
+        "condition": ["and",
+            ["not_since", 168, "hours"],
+            ["or",
+                ["hour_is_between", 5, 9],
+                ["not_since", 200, "hours"]
+            ]
+        ]
+    },
+    {
+        "name": "crashpi1.rsnapshot",
+        "command": "/home/pi/backpack/rsnapshot-run.sh",
+        "condition": ["and",
+            ["not_since", 20, "hours"],
+            ["or",
+                ["hour_is_between", 5, 9],
+                ["not_since", 50, "hours"]
+            ]
+        ]
+    },
+    {
+        "name": "crashpi1.offsite-mirror-crashpi2",
+        "command": "/home/pi/backpack/remote-mirror.sh crashpi2",
+        "condition": ["and",
+            ["not_since", 20, "hours"],
+            ["or",
+                ["hour_is_between", 5, 9],
+                ["not_since", 50, "hours"]
+            ]
+        ]
+    },
+    {
+        "name": "crashpi1.stats",
+        "command": "/home/pi/backpack/stats.sh",
+        "condition": ["and",
+            ["not_since", 20, "hours"],
+            ["or",
+                ["hour_is_between", 5, 9],
+                ["not_since", 50, "hours"]
+            ]
+        ]
+    }
+]
