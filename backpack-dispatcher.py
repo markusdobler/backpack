@@ -121,6 +121,8 @@ class Job(object):
             urllib2.urlopen(SUCCESS_URL % self.name, timeout=10)
         elif isinstance(ex, SkipExecution):
             self.logger.warn("skip: %s" % ex)
+        elif isinstance(ex, subprocess.CalledProcessError):
+            self.logger.error("fail: %s: %r" % (ex, ex.output))
         else:
             self.logger.error("fail: %s" % ex)
         return True # do not throw exception again -> only gets logged, further jobs in loop get processed
