@@ -3,8 +3,7 @@
 set -e
 set -o pipefail
 
-BORG_CMD="$HOME/bin/borg-linux64"
-PATHS="$HOME/wip/ $HOME/.thunderbird/ $HOME/.mozilla/ $HOME/src"
+. ~/.backpack/conf/borg-conf.sh
 
 SRC_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 BORG_CMD=${BORG_CMD:-borg}
