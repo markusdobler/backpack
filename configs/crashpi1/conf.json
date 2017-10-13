@@ -46,12 +46,6 @@
     {
         "name": "crashpi1.stats",
         "command": "/home/pi/backpack/stats.sh",
-        "condition": ["and",
-            ["not_since", 20, "hours"],
-            ["or",
-                ["hour_is_between", 5, 9],
-                ["not_since", 50, "hours"]
-            ]
-        ]
+        "condition": ["not_since", 2, "hours"]
     }
 ]
