@@ -38,10 +38,11 @@ case $1 in
     ensure)
         if [ -e $SOCKET ]
         then
-            RESPONSE=$(ssh -S $SOCKET -q mado@phoenix.uberspace.de true)
+            DATA=$((RANDOM))
+            RESPONSE=$(ssh -S $SOCKET -q mado@phoenix.uberspace.de echo $DATA)
             if [[ $? -eq 0 ]]
             then
-                if  [[ "$RESPONSE" == "do-not-send-commands" ]]
+                if  [[ "$RESPONSE" == "$DATA" ]]
                 then
                     exit 0
                 fi

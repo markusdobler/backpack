@@ -14,5 +14,21 @@
                 ["not_since", 50, "hours"]
             ]
         ]
+    },
+    {
+        "name": "crashpi2.rsnapshot",
+        "command": "/home/pi/backpack/rsnapshot-run.sh",
+        "condition": ["and",
+            ["not_since", 20, "hours"],
+            ["or",
+                ["hour_is_between", 5, 9],
+                ["not_since", 50, "hours"]
+            ]
+        ]
+    },
+    {
+        "name": "crashpi2.stats",
+        "command": "/home/pi/backpack/stats.sh",
+        "condition": ["not_since", 2, "hours"]
     }
 ]
