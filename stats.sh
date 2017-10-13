@@ -1,7 +1,7 @@
 #!/bin/bash
 
 curl --get mado.phoenix.uberspace.de/backpack/log/stats/$(hostname) \
-    --data-urlencode "uptime=$(uptime | sed 's/^.* up \(\S\+\s\+[^, ]\+\),\? .*$/\1/')" \
+    --data-urlencode "uptime=$(uptime -p | sed 's/^up \(\S\+\s\+[^, ]\+\),\? .*$/\1/')" \
     --data-urlencode "available=$(df /media/data/ -h --output='avail' | tail -n 1 | sed 's/ //g')" \
     --data-urlencode "segments=$(cd /media/data/borg/data/; ls $(ls | tail -n 1) | tail -n 1)"
 
