@@ -73,8 +73,7 @@ def index():
             expected_interval_days = current_app.config['EXPECTED_TIMEDELTA'].get(tag, 2)
             overdue_factor = timedelta.total_seconds() / (expected_interval_days * 24. * 60 * 60)
             status_class = ("success" if overdue_factor < 1
-                            else "info" if overdue_factor < 2
-                            else "alert" if overdue_factor < 5
+                            else "warning" if overdue_factor < 4
                             else "danger")
             status_text = humanize.naturaltime(timedelta)
             status[host].append((timestamp, job, status_text, status_class, expected_interval_days))
