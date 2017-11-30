@@ -14,7 +14,7 @@ function kill_connection {
 }
 
 function start_connection {
-    ssh -M -S $SOCKET -fnNT -L ${PORT_LOCAL}:localhost:${PORT_REMOTE} mado@phoenix.uberspace.de
+    ssh -M -S $SOCKET -fnNT -L ${PORT_LOCAL}:localhost:${PORT_REMOTE} mado@phoenix.uberspace.de > /dev/null 2>&1
 }
 
 # kill old session to proxy, establish new session

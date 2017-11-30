@@ -5,7 +5,7 @@
         "condition": ["and",
             ["not_since", 20, "hours"],
             ["or",
-                ["hour_is_between", 5, 9],
+                ["hour_is_between", 1, 9],
                 ["not_since", 50, "hours"]
             ]
         ]
