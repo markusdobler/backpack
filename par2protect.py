@@ -45,7 +45,7 @@ def par2protect(directory,
     fast adler32 checksums
     '''
 
-    exclude_reg = re.compile(r'\.[1-9]+[0-9]*$') # par2 repaired files end with .N
+    exclude_reg = re.compile(r'(^lock)|(\.[1-9]+[0-9]*$)') # par2 repaired files end with .N, lock files start with 'lock'
 
     # Compute a fast ckecksum of all given files that do not start
     # with a dot

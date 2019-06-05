@@ -12,7 +12,7 @@
     },
     {
         "name": "crashpi1.par2protect",
-        "command": "/home/pi/backpack/par2protect.py /media/data/borg/data/",
+        "command": "/home/pi/backpack/par-protect-borg.sh",
         "condition": ["and",
             ["not_since", 168, "hours"],
             ["or",
