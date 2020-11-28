@@ -1,0 +1,3 @@
+{% for s in status -%}
+{{s.code}}: {{s.tag}} ({{s.timedelta_human}})
+{% endfor %}
