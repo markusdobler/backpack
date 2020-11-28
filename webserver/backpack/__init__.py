@@ -13,4 +13,7 @@ def create_app(config_object_name='config'):
     for bp in blueprints:
         app.register_blueprint(bp)
 
+    from support import mail
+    mail.init_app(app)
+
     return app

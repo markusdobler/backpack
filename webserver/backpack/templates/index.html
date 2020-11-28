@@ -42,8 +42,9 @@
           <div class="col-md-3">
             <h3>{{host}}</h3>
             <ul>
-              {% for (timestamp, job, status_text, status_class, expected_interval_days) in status[host] | sort(reverse=True) %}
-              <li><span class="text-{{status_class}}" data-html="true" data-toggle="tooltip" title="{{'{:%Y-%m-%d %H:%M:%S}<br>expected interval: {:d} days'.format(timestamp, expected_interval_days)}}" >{{status_text}}</span>: {{job}}</li>
+              {% for s in status[host] | sort(reverse=True) %}
+              {% set status_class = dict(ok="success", delayed="warning", broken="danger")[s.code] %}
+              <li><span class="text-{{status_class}}" data-html="true" data-toggle="tooltip" title="{{'{:%Y-%m-%d %H:%M:%S}<br>expected interval: {:d} days'.format(s.timestamp, s.expected_interval_days)}}" >{{s.timedelta_human}}</span>: {{s.job}}</li>
               {% endfor %}
             </ul>
           </div>
